@@ -9,11 +9,12 @@
  * @param int contentId
  *  The nodes vid
  */
- H5P.Timeline = (function ($) {
+ H5P.AdaptTimeline = (function ($) {
 
   function C(options, contentId) {
     var self = this;
     this.options = $.extend(true, {}, {
+      adaptID: "",
       timeline: {
         type: 'default',
         defaultZoomLevel: 0,
@@ -31,6 +32,9 @@
         }
       }
     }
+
+    console.log(this.options.adaptID);
+    console.log(C.adaptID);
 
     // Check if eras are legal - if not, remove them!
     if (this.options.timeline.era !== undefined) {

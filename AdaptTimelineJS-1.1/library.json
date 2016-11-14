@@ -1,0 +1,17 @@
+{
+  "title": "AdaptTimelineJS",
+  "contentType": "Library",
+  "majorVersion": 1,
+  "minorVersion": 1,
+  "patchVersion": 19,
+  "descripion": "A Storytelling Timeline built in JavaScript. http://timeline.knightlab.com. Version 2.36.0",
+  "machineName": "AdaptTimelineJS",
+  "runnable": 0,
+  "author": "KnightLab",
+  "license": "MPL2",
+  "preloadedJs": [{
+    "path": "js/storyjs-embed.js"
+  }, {
+    "path": "timeline.js"
+  }]
+}
