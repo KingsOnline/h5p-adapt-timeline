@@ -3927,35 +3927,28 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
             detachMessege()
         }
 
-        function messageAdapt() {
-            console.log('messageAdapt');
-            console.log(config);
-            console.log(config.source);
-            console.log(config.source.adaptID)
-
-            console.log();
-
-            console.log(config.current_slide);
-            console.log(slides.length);
-            console.log(config);
-        }
-
         function visitedSlide(slideNum) {
+            console.log('slide number ' + slideNum + ' has been visited.');
             slide_complete[slideNum] = true;
         }
 
         function checkAllSlideVisited() {
-            return slide_complete.every(function(el) {
-                console.log('looping' + el);
-                return el === true;
-            });
+            console.log("in CheckAllSlideVisited()");
+            for(var i = 0 ; i < slide_complete.length ; i++){
+              console.log('looping' + el);
+              if(slide_complete[i] != true)
+                return false;
+            }
+            return true;
         }
 
         function messageAdaptOneComplete() {
+            console.log('started' + config.source.adaptID);
             window.top.postMessage(('started' + config.source.adaptID), '*'); // messages Adapt
         }
 
         function messageAdaptAllComplete() {
+          console.log('ended' + config.source.adaptID);
             window.top.postMessage(('ended' + config.source.adaptID), '*');
         }
 
@@ -3965,7 +3958,6 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
             messageAdaptOneComplete();
             if (checkAllSlideVisited())
                 messageAdaptAllComplete();
-            console.log('all have been seen!');
             config.current_slide = current_slide;
             VMM.fireEvent(layout, "UPDATE")
         }

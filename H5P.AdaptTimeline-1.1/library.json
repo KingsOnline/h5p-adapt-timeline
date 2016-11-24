@@ -1,9 +1,9 @@
 {
-  "title": "AdaptTimeline",
+  "title": "Adapt Timeline",
   "description": "Create good loking timelines",
   "majorVersion": 1,
   "minorVersion": 1,
-  "patchVersion": 22,
+  "patchVersion": 23,
   "runnable": 1,
   "fullscreen": 1,
   "machineName": "H5P.AdaptTimeline",
