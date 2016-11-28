@@ -3934,12 +3934,15 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
 
         function checkAllSlideVisited() {
             console.log("in CheckAllSlideVisited()");
+            var pass = true;
             for(var i = 0 ; i < slide_complete.length ; i++){
-              console.log('looping' + el);
-              if(slide_complete[i] != true)
-                return false;
+              if(slide_complete[i] != true){
+                pass = false;
+                console.log(i +  " hasn't been visted");
+              }
+
             }
-            return true;
+            return pass;
         }
 
         function messageAdaptOneComplete() {
@@ -3954,10 +3957,12 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
 
         function upDate() {
             visitedSlide(current_slide);
-            messageAdapt();
-            messageAdaptOneComplete();
+
             if (checkAllSlideVisited())
                 messageAdaptAllComplete();
+            else
+              messageAdaptOneComplete();
+
             config.current_slide = current_slide;
             VMM.fireEvent(layout, "UPDATE")
         }
@@ -3974,6 +3979,7 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
                 var _slide = new VMM.Slider.Slide(d[i], $slides_items);
                 slides.push(_slide)
             }
+            visitedSlide(0); // sets that the first slide is ready for Adapt compleition
         }
 
         function preloadSlides(skip) {
@@ -4301,11 +4307,11 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
             buildSlides(data);
 
             console.log(slides.length);
-            for (var i = 0; i < slides.length; ++i) {
+            for (var i = 0; i < slides.length; i++) {
                 console.log("looping" + i);
                 slide_complete[i] = false;
             }
-
+            visitedSlide(0);
 
             if (VMM.Browser.device == "tablet" || VMM.Browser.device == "mobile") {
                 config.duration = 500;

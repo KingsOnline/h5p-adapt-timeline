@@ -1,4 +1,9 @@
 [{
+  "name": "adaptID",
+  "type": "text",
+  "label": "Enter the ID of the Adapt component",
+  "description": "You can read this from the Authoring Tool"
+}, {
   "name": "timeline",
   "type": "group",
   "expanded": true,
@@ -392,9 +397,4 @@
     }],
     "default": "en"
   }]
-}, {
-  "name": "adaptID",
-  "type": "text",
-  "label": "Enter the ID of the Adapt component",
-  "description": "You can read this from the Authoring Tool"
 }]

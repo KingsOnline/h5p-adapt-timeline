@@ -1,5 +1,5 @@
 AdaptTimelineJS = (function ($) {
-  function Timeline (options, major, minor) {
+  function AdaptTimeline (options, major, minor) {
     // This non-runnable library does not know it's own major+minor, therefore
     // we have tp provide it from runnable library using me
     var libraryPath = 'AdaptTimelineJS-' + major + '.' + minor;

@@ -33,9 +33,6 @@
       }
     }
 
-    console.log(this.options.adaptID);
-    console.log(C.adaptID);
-
     // Check if eras are legal - if not, remove them!
     if (this.options.timeline.era !== undefined) {
       for (var i=this.options.timeline.era.length-1; i >= 0; i--) {
@@ -110,7 +107,7 @@
     if (self.validate()) {
       // Load library.json - need to inform TimelineJS which version it is
       $.getJSON(self.getLibraryFilePath('library.json'), function (data) {
-        new TimelineJS({
+        new AdaptTimelineJS({
           type: 'timeline',
           width: '100%',
           height: '100%',

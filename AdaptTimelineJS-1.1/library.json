@@ -3,7 +3,7 @@
   "contentType": "Library",
   "majorVersion": 1,
   "minorVersion": 1,
-  "patchVersion": 21,
+  "patchVersion": 27,
   "descripion": "A Storytelling Timeline built in JavaScript. http://timeline.knightlab.com. Version 2.36.0",
   "machineName": "AdaptTimelineJS",
   "runnable": 0,
