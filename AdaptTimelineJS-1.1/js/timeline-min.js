@@ -6,6 +6,12 @@
  This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
  If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+var slide_complete = [];
+
+function visitedSlide(slideNum) {
+    slide_complete[slideNum] = true;
+}
+
 var oldQuery = window.jQuery;
 jQuery = window.jQuery = H5P.jQuery;
 (function() {
@@ -48,7 +54,7 @@ if (typeof VMM == "undefined") {
     VMM.debug = true;
     VMM.master_config = {
         init: function() {
-            return this;
+            return this
         },
         sizes: {
             api: {
@@ -3668,7 +3674,7 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
         var config, timer, $slider, $slider_mask, $slider_container, $slides_items, $dragslide, $explainer, events = {},
             data = [],
             slides = [],
-            slide_complete = [],
+
             slide_positions = [],
             slides_content = "",
             current_slide = 0,
@@ -3726,7 +3732,6 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
         config.slider.height = config.height;
         this.init = function(d) {
             slides = [];
-            slide_complete = [];
             slide_positions = [];
             if (typeof d != "undefined") {
                 this.setData(d)
@@ -3924,10 +3929,6 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
             detachMessege()
         }
 
-        function visitedSlide(slideNum) {
-            slide_complete[slideNum] = true;
-        }
-
         function checkAllSlideVisited() {
             var pass = true;
             for(var i = 0 ; i < slide_complete.length ; i++){
@@ -3949,7 +3950,6 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
 
         function upDate() {
             visitedSlide(current_slide);
-
             if (checkAllSlideVisited())
                 messageAdaptAllComplete();
             else
@@ -5790,8 +5790,34 @@ if (typeof VMM.Timeline != "undefined" && typeof VMM.Timeline.TimeNav == "undefi
 
         function onMarkerClick(e) {
             $dragslide.cancelSlide();
+            slide_complete[e.data.number] = true;
+            if (checkAllSlideVisited())
+                messageAdaptAllComplete();
+            else
+              messageAdaptOneComplete();
             goToMarker(e.data.number);
             upDate()
+        }
+
+        function checkAllSlideVisited() {
+            var pass = true;
+            for(var i = 0 ; i < slide_complete.length ; i++){
+              if(slide_complete[i] != true){
+                pass = false;
+              }
+
+            }
+            return pass;
+        }
+
+        function messageAdaptOneComplete() {
+            console.log('started' + config.source.adaptID);
+            window.top.postMessage(('started' + config.source.adaptID), '*'); // messages Adapt
+        }
+
+        function messageAdaptAllComplete() {
+          console.log('ended' + config.source.adaptID);
+            window.top.postMessage(('ended' + config.source.adaptID), '*');
         }
 
         function onMarkerHover(e) {
