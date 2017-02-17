@@ -48,9 +48,7 @@ if (typeof VMM == "undefined") {
     VMM.debug = true;
     VMM.master_config = {
         init: function() {
-            console.log('init');
-            console.log(this);
-            return this
+            return this;
         },
         sizes: {
             api: {
@@ -203,7 +201,6 @@ if (typeof VMM == "undefined") {
 function trace(msg) {
     if (VMM.debug) {
         if (window.console) {
-            console.log(msg)
         } else if (typeof jsTrace != "undefined") {
             jsTrace.send(msg)
         } else {}
@@ -3928,17 +3925,14 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
         }
 
         function visitedSlide(slideNum) {
-            console.log('slide number ' + slideNum + ' has been visited.');
             slide_complete[slideNum] = true;
         }
 
         function checkAllSlideVisited() {
-            console.log("in CheckAllSlideVisited()");
             var pass = true;
             for(var i = 0 ; i < slide_complete.length ; i++){
               if(slide_complete[i] != true){
                 pass = false;
-                console.log(i +  " hasn't been visted");
               }
 
             }
@@ -3946,12 +3940,10 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
         }
 
         function messageAdaptOneComplete() {
-            console.log('started' + config.source.adaptID);
             window.top.postMessage(('started' + config.source.adaptID), '*'); // messages Adapt
         }
 
         function messageAdaptAllComplete() {
-          console.log('ended' + config.source.adaptID);
             window.top.postMessage(('ended' + config.source.adaptID), '*');
         }
 
@@ -4306,9 +4298,7 @@ if (typeof VMM != "undefined" && typeof VMM.Slider == "undefined") {
             buildNavigation();
             buildSlides(data);
 
-            console.log(slides.length);
             for (var i = 0; i < slides.length; i++) {
-                console.log("looping" + i);
                 slide_complete[i] = false;
             }
             visitedSlide(0);
